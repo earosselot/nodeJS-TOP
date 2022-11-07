@@ -22,8 +22,17 @@ app.use('/some-route', middlewareFunction2)
 
 app.get('/', middlewareFunction3)
 
+app.get('/broken', (req, res) => {
+	throw new Error('broken route')
+})
+
 app.use((req, res) => {
 	res.send('success')
+})
+
+app.use((err, req, res, next) => {
+	console.error(err.stack)
+	res.status(500).send('Something broke!')
 })
 
 app.listen(8080)
