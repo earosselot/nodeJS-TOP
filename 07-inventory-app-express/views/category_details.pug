@@ -1,0 +1,22 @@
+extends layout
+
+block content 
+  h2= category.name
+  p= category.description
+
+  h3 Items in Category
+  ul 
+    each item in items 
+      li 
+        a(href=item.url) #{item.name}
+        |  (stock: #{item.number_in_stock}) ($ #{item.price})
+    else 
+      li No items in this category
+
+  hr
+
+  form(action=category.url+"/delete")
+    button.btn.btn-danger(type="submit") Delete
+
+  form(action=category.url+"/update")
+    button.btn.btn-primary(type="submit") Update
