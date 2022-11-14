@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge') 
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Members Only
+body
+    h1 Sign Up
+    form(action='/user', method='POST')
+        label(for='firstName') First Name:
+        input(id='firstName', name='firstName', placeholder='Freddy', type='text')
+        label(for='lastName') Last Name:
+        input(id='lastName', name='lastName', placeholder='Mercury', type='text')
+        label(for='email') Email:
+        input(id='email', name='email', placeholder='email@example.com', type='email')
+        label(for='password') Password:
+        input(id='password', name='password', type='password')
+        label(for='passwordConfirmation') Repeat password:
+        input(id='passwordConfirmation', name='passwordConfirmation', type='password')   
+        button Sign Up
+
+    if errors
+        p errors 
+    else 
+        p no errors
+
+    each error in errors
+        li !{error.param}: !{error.msg} 
