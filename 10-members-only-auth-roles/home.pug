@@ -9,3 +9,9 @@ html(lang='en')
 	body
 		a(href='sign-up') Sign Up
 
+		a(href='login') Log In
+
+	if user
+		p !{user.firstName}
+		p !{user.membershipStatus}
+
