@@ -8,7 +8,7 @@
 		"start": "node index.js",
 		"devstart": "nodemon app.js"
 	},
-	"author": "",
+	"author": "earosselot",
 	"license": "ISC",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",

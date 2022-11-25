@@ -19,6 +19,20 @@ class UserSystem {
 	async findById(id) {
 		return await User.findById(id).exec()
 	}
+
+	async makeMember(user) {
+		if (user.membershipStatus == 'Guest') {
+			user.membershipStatus = 'Member'
+			await user.save()
+		}
+	}
+
+	async makeAdmin(user) {
+		if (user.membershipStatus == 'Member') {
+			user.membershipStatus = 'Admin'
+			await user.save()
+		}
+	}
 }
 
 module.exports = UserSystem

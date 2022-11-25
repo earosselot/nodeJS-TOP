@@ -1,0 +1,20 @@
+doctype html
+html(lang='en')
+head
+	meta(charset='UTF-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge') 
+	meta(name='viewport', content='width=device-width, initial-scale=1.0')
+	title Members Only
+body
+	h1 Join Club
+	form(action='/user/validate-key', method='POST')
+		label(for='clubKey') Secret club key:
+		input(id='clubKey', name='clubKey', type='text')
+		button Validate Key
+
+	if invalidKey
+		p The key is not correct
+
+	if user
+		p !{user.firstName}
+		p !{user.membershipStatus}

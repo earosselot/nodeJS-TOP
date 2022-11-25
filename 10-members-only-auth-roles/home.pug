@@ -1,17 +1,39 @@
 doctype html
 html(lang='en')
-	head
-		meta(charset='UTF-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge') 
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		title Members Only
-		
-	body
-		a(href='sign-up') Sign Up
+    head
+        meta(charset='UTF-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title Members Only
 
-		a(href='login') Log In
+    body
+        a(href='/user/sign-up') Sign Up
+        br
 
-	if user
-		p !{user.firstName}
-		p !{user.membershipStatus}
+        a(href='/user/login') Log In
+        br
 
+    if user
+        if (user.membershipStatus === 'Guest')
+            a(href='/user/join-club') Join Club
+        if (user.membershipStatus === 'Member')
+            a(href='/user/become-admin') Become Admin
+        br
+        button(onclick="window.location.href='message/new-message';") Create new message
+        p !{user.firstName}
+        p !{user.membershipStatus}
+        
+
+    if messages
+        div
+          each message in messages
+              div !{message.text}
+              if (user && (user.membershipStatus === 'Member' || user.membershipStatus === 'Admin'))
+                div !{message.author.firstName} !{message.author.lastName} - !{message.showDate}
+                if (user.membershipStatus === 'Admin')
+                    form(action="/message/delete", method="POST")
+                        input(hidden, id='messageId', name='messageId', type='text', value=message.id)
+                        button delete
+
+          else
+              div There are no messages yet.
